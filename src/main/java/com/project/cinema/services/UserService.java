@@ -4,6 +4,7 @@ import com.project.cinema.model.User;
 import com.project.cinema.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,7 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
+        System.out.println(userRepository.findAll());
         return userRepository.findAll();
     }
 

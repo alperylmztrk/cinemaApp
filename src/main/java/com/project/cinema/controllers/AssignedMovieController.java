@@ -2,7 +2,6 @@ package com.project.cinema.controllers;
 
 import com.project.cinema.dto.AssignedMovieDTO;
 import com.project.cinema.model.AssignedMovie;
-import com.project.cinema.model.Seat;
 import com.project.cinema.services.AssignedMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

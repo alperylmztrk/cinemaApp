@@ -20,12 +20,14 @@ public class HallController {
     public HallController(HallService hallService) {
         this.hallService = hallService;
     }
+
     @GetMapping
-    public List<Hall> getAllHalls(){
+    public List<Hall> getAllHalls() {
         return hallService.getAllHalls();
     }
+
     @GetMapping("/{hallId}")
-    public Hall getHallById(@PathVariable Long hallId){
+    public Hall getHallById(@PathVariable Long hallId) {
         return hallService.getHallById(hallId);
     }
 }

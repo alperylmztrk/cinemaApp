@@ -1,13 +1,19 @@
 package com.project.cinema.services;
 
+import com.project.cinema.dto.SaveTicketDTO;
+import com.project.cinema.dto.SaveTicketWithUserDTO;
+import com.project.cinema.dto.SaveUserDTO;
 import com.project.cinema.dto.TicketDTO;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.model.Ticket;
 import com.project.cinema.model.User;
 import com.project.cinema.repos.TicketRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.beans.BeanProperty;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,11 +59,45 @@ public class TicketService {
             ticket.setAssignedMovie(assignedMovie);
             ticket.setSeatNumber(ticketDTO.getSeatNumber());
             return ticketRepository.save(ticket);
-
         } else {
             return null;
         }
+    }
+
+    public Ticket addTicketWithUser(SaveTicketDTO saveTicketDTO, SaveUserDTO saveUserDTO) {
+
+        User user = new User();
+        BeanUtils.copyProperties(saveUserDTO, user);
+        var newUser = userService.saveUser(user);
+
+        System.out.println(newUser);
+
+        Ticket ticket = new Ticket();
+        BeanUtils.copyProperties(saveTicketDTO, ticket);
+        ticket.setUser(newUser);
+
+        System.out.println(ticket);
+
+        return ticketRepository.save(ticket);
 
     }
 
+    @Transactional
+    public Ticket addTicketWithUser2(SaveTicketWithUserDTO saveTicketWithUserDTO) {
+
+        User user = new User();
+        BeanUtils.copyProperties(saveTicketWithUserDTO, user);
+        var newUser = userService.saveUser(user);
+
+        System.out.println(newUser);
+
+        Ticket ticket = new Ticket();
+        BeanUtils.copyProperties(saveTicketWithUserDTO, ticket);
+        ticket.setUser(newUser);
+
+        System.out.println(ticket);
+
+        return ticketRepository.save(ticket);
+
+    }
 }
