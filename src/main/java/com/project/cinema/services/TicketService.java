@@ -64,23 +64,6 @@ public class TicketService {
         }
     }
 
-    public Ticket addTicketWithUser(SaveTicketDTO saveTicketDTO, SaveUserDTO saveUserDTO) {
-
-        User user = new User();
-        BeanUtils.copyProperties(saveUserDTO, user);
-        var newUser = userService.saveUser(user);
-
-        System.out.println(newUser);
-
-        Ticket ticket = new Ticket();
-        BeanUtils.copyProperties(saveTicketDTO, ticket);
-        ticket.setUser(newUser);
-
-        System.out.println(ticket);
-
-        return ticketRepository.save(ticket);
-
-    }
 
     @Transactional
     public Ticket addTicketWithUser2(SaveTicketWithUserDTO saveTicketWithUserDTO) {
