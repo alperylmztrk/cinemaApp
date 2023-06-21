@@ -34,7 +34,7 @@ public class Movie {
     @Column(name = "rating", nullable = false)
     private double rating;
 
-    @Column(name = "summary", nullable = false, length = 1000, columnDefinition = "TEXT")
+    @Column(name = "summary", nullable = false)
     private String summary;
 
     @Column(name = "posterImgPath", nullable = false)
