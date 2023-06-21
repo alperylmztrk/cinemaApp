@@ -10,22 +10,25 @@ import java.util.List;
 @RestController
 @RequestMapping("/seats")
 public class SeatController {
-    private SeatService seatService;
+    private final SeatService seatService;
 
     @Autowired
     public SeatController(SeatService seatService) {
         this.seatService = seatService;
     }
+
     @GetMapping
-    public List<Seat> getAllSeats(){
+    public List<Seat> getAllSeats() {
         return seatService.getAllSeats();
     }
+
     @GetMapping("/{seatId}")
-    public Seat getSeatById(@PathVariable Long seatId){
+    public Seat getSeatById(@PathVariable Long seatId) {
         return seatService.getSeatById(seatId);
     }
+
     @PostMapping
-    public Seat createSeat(@RequestBody Seat newSeat){
+    public Seat createSeat(@RequestBody Seat newSeat) {
         return seatService.addSeat(newSeat);
     }
 }

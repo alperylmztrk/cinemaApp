@@ -25,7 +25,6 @@ public class Seat {
     @JsonBackReference
     @ManyToMany(mappedBy = "reservedSeats")
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST})
-
     private List<AssignedMovie> assignedMovies = new ArrayList<>();
 
     public Seat(String number, List<AssignedMovie> assignedMovies) {

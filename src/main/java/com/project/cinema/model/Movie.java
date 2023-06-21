@@ -50,4 +50,5 @@ public class Movie {
         this.summary = summary;
         this.posterImgPath = posterImgPath;
     }
+
 }

@@ -25,14 +25,12 @@ public class AssignedMovieService {
     private final AssignedMovieRepository assignedMovieRepository;
     private final MovieService movieService;
     private final HallService hallService;
-    private final SeatService seatService;
 
     @Autowired
-    public AssignedMovieService(AssignedMovieRepository assignedMovieRepository, MovieService movieService, HallService hallService, SeatService seatService) {
+    public AssignedMovieService(AssignedMovieRepository assignedMovieRepository, MovieService movieService, HallService hallService) {
         this.assignedMovieRepository = assignedMovieRepository;
         this.movieService = movieService;
         this.hallService = hallService;
-        this.seatService = seatService;
     }
 
     public List<AssignedMovie> getAllAssignedMovies(Optional<Long> movieId, Optional<Long> hallId) {

@@ -1,14 +1,17 @@
 package com.project.cinema.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "users")
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
@@ -23,6 +26,9 @@ public class User {
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
 
     public User(String name, String surname, String username) {
         this.name = name;
