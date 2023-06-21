@@ -39,12 +39,6 @@ public class TicketController {
         return ticketService.addTicket(ticketDTO);
     }
 
-    @PostMapping("ticket-with-user")
-    public Ticket createTicketWithUser(@RequestBody SaveTicketDTO saveTicketDTO, @RequestBody SaveUserDTO saveUserDTO) {
-        System.out.println("aaaaaa");
-        return ticketService.addTicketWithUser(saveTicketDTO,saveUserDTO);
-    }
-
     @PostMapping("ticket-with-user2")
     public Ticket createTicketWithUser2(@RequestBody SaveTicketWithUserDTO saveTicketWithUserDTO) {
         System.out.println("aaaaaa");
