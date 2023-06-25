@@ -1,5 +1,6 @@
 package com.project.cinema.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class User {
     private String username;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Ticket> tickets;
 
     public User(String name, String surname, String username) {

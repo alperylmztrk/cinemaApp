@@ -19,7 +19,7 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers(@RequestHeader(value = "ekleyen_kullanici") String sicil) {
+    public List<User> getAllUsers(String sicil) {
         System.out.println("sicil= " + sicil);
         return userService.getAllUsers();
     }
