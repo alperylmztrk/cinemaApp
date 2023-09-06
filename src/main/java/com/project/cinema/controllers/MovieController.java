@@ -42,4 +42,10 @@ public class MovieController {
     public void deleteMovieById(@PathVariable Long movieId) {
         movieService.deleteMovie(movieId);
     }
+
+    @PostMapping("/fake-veri-bas")
+    public List<Movie> addFakeMovies() {
+        return movieService.addFakeMovies();
+    }
+
 }
