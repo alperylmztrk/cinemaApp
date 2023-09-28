@@ -1,6 +1,7 @@
 package com.project.cinema.controllers;
 
-import com.project.cinema.dto.AssignedMovieDTO;
+import com.project.cinema.dto.AssignedMovieDtoRequest;
+import com.project.cinema.dto.AssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.services.AssignedMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +32,13 @@ public class AssignedMovieController {
     }
 
     @PostMapping
-    public AssignedMovie createAssignedMovie(@RequestBody AssignedMovieDTO assignedMovieDTO) {
-        return assignedMovieService.addAssignedMovie(assignedMovieDTO);
+    public AssignedMovieDtoResponse createAssignedMovie(@RequestBody AssignedMovieDtoRequest assignedMovieDtoRequest) {
+        return assignedMovieService.addAssignedMovie(assignedMovieDtoRequest);
     }
 
     @PutMapping("/{assignedMovieId}")
-    public AssignedMovie updateAssignedMovie(@PathVariable Long assignedMovieId, @RequestBody AssignedMovieDTO assignedMovieDTO) {
-        return assignedMovieService.updateAssignedMovieById(assignedMovieId, assignedMovieDTO);
+    public AssignedMovie updateAssignedMovie(@PathVariable Long assignedMovieId, @RequestBody AssignedMovieDtoRequest assignedMovieDtoRequest) {
+        return assignedMovieService.updateAssignedMovieById(assignedMovieId, assignedMovieDtoRequest);
     }
 
     @DeleteMapping("/{assignedMovieId}")
