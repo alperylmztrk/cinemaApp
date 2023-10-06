@@ -53,9 +53,7 @@ public class AssignedMovieService {
             AssignedMovie assignedMovie = new AssignedMovie();
             assignedMovie.setHall(hall);
             assignedMovie.setMovie(movie);
-            //  assignedMovie.setId(assignedMovieDTO.getId());
             assignedMovie.setStartDateTime(assignedMovieDtoRequest.getStartDateTime());
-            //assignedMovie.setReservedSeats(assignedMovieDTO.getReservedSeats());
 
             List<AssignedMovie> assignedMovieList = assignedMovieRepository.findAll();
 
@@ -66,7 +64,7 @@ public class AssignedMovieService {
                 if (newDateTime.toLocalDate().equals(dateTime.toLocalDate()) && assignedMovieDtoRequest.getHallId().equals(assignedMovieDate.getHall().getId())) {
                     if (Math.abs(newDateTime.getHour() - dateTime.getHour()) < 2) {
                         System.out.println("Ayni salonda filmler arasi en az 2 saat olmali.");
-                        return null;
+                        throw new RuntimeException("Ayni salonda filmler arasi en az 2 saat olmali.");
                     }
                 }
             }
