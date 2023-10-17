@@ -1,7 +1,8 @@
 package com.project.cinema.controllers;
 
-import com.project.cinema.dto.AssignedMovieDtoRequest;
-import com.project.cinema.dto.AssignedMovieDtoResponse;
+import com.project.cinema.dto.request.AssignedMovieDtoRequest;
+import com.project.cinema.dto.response.GetAssignedMovieDtoResponse;
+import com.project.cinema.dto.response.SaveAssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.services.AssignedMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class AssignedMovieController {
     }
 
     @GetMapping
-    public List<AssignedMovie> getAllAssignedMovies(@RequestParam Optional<Long> movieId, @RequestParam Optional<Long> hallId) {
+    public List<GetAssignedMovieDtoResponse> getAllAssignedMovies(@RequestParam Optional<Long> movieId, @RequestParam Optional<Long> hallId) {
         return assignedMovieService.getAllAssignedMovies(movieId, hallId);
     }
 
@@ -32,7 +33,7 @@ public class AssignedMovieController {
     }
 
     @PostMapping
-    public AssignedMovieDtoResponse createAssignedMovie(@RequestBody AssignedMovieDtoRequest assignedMovieDtoRequest) {
+    public SaveAssignedMovieDtoResponse createAssignedMovie(@RequestBody AssignedMovieDtoRequest assignedMovieDtoRequest) {
         return assignedMovieService.addAssignedMovie(assignedMovieDtoRequest);
     }
 

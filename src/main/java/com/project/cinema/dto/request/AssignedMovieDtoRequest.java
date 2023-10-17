@@ -1,25 +1,22 @@
-package com.project.cinema.dto;
+package com.project.cinema.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+
+import com.project.cinema.model.Seat;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class AssignedMovieDtoResponse {
+public class AssignedMovieDtoRequest {
 
     private Long id;
     private Long movieId;
-    private String movieTitle;
     private Long hallId;
-    private String hallName;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime startDateTime;
+
 
 }

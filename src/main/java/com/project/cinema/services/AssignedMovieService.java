@@ -1,7 +1,8 @@
 package com.project.cinema.services;
 
-import com.project.cinema.dto.AssignedMovieDtoRequest;
-import com.project.cinema.dto.AssignedMovieDtoResponse;
+import com.project.cinema.dto.request.AssignedMovieDtoRequest;
+import com.project.cinema.dto.response.GetAssignedMovieDtoResponse;
+import com.project.cinema.dto.response.SaveAssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.model.Hall;
 import com.project.cinema.model.Movie;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,22 +29,36 @@ public class AssignedMovieService {
         this.hallService = hallService;
     }
 
-    public List<AssignedMovie> getAllAssignedMovies(Optional<Long> movieId, Optional<Long> hallId) {
-
+    public List<GetAssignedMovieDtoResponse> getAllAssignedMovies(Optional<Long> movieId, Optional<Long> hallId) {
+        List<GetAssignedMovieDtoResponse> getAssignedMovieDtoResponseList = new ArrayList<>();
+        List<AssignedMovie> assignedMovieList;
         if (movieId.isPresent() && hallId.isEmpty()) {
-            return assignedMovieRepository.findByMovieIdOrderByStartDateTimeAsc(movieId.get());
+            assignedMovieList = assignedMovieRepository.findByMovieIdOrderByStartDateTimeAsc(movieId.get());
         } else if (movieId.isEmpty() && hallId.isPresent()) {
-            return assignedMovieRepository.findByHallIdOrderByStartDateTimeAsc(hallId.get());
+            assignedMovieList = assignedMovieRepository.findByHallIdOrderByStartDateTimeAsc(hallId.get());
         } else if (movieId.isPresent() && hallId.isPresent()) {
-            return assignedMovieRepository.findByMovieIdAndHallIdOrderByStartDateTimeAsc(movieId.get(), hallId.get());
+            assignedMovieList = assignedMovieRepository.findByMovieIdAndHallIdOrderByStartDateTimeAsc(movieId.get(), hallId.get());
         } else {
-
-            return assignedMovieRepository.findAllByOrderByStartDateTimeAsc();
+            assignedMovieList = assignedMovieRepository.findAllByOrderByStartDateTimeAsc();
         }
 
+        for (AssignedMovie assignedMovie : assignedMovieList) {
+            getAssignedMovieDtoResponseList.add(GetAssignedMovieDtoResponse.builder().
+                    id(assignedMovie.getId()).
+                    movieId(assignedMovie.getMovie().getId()).
+                    movieTitle(assignedMovie.getMovie().getTitle()).
+                    startDateTime(assignedMovie.getStartDateTime()).
+                    hallId(assignedMovie.getHall().getId()).
+                    hallName(assignedMovie.getHall().getName()).
+                    hallCapacity(assignedMovie.getHall().getCapacity()).
+                    reservedSeatNum(assignedMovie.getReservedSeats().size()).
+                    build());
+        }
+
+        return getAssignedMovieDtoResponseList;
     }
 
-    public AssignedMovieDtoResponse addAssignedMovie(AssignedMovieDtoRequest assignedMovieDtoRequest) {
+    public SaveAssignedMovieDtoResponse addAssignedMovie(AssignedMovieDtoRequest assignedMovieDtoRequest) {
 
         Movie movie = movieService.getMovieById(assignedMovieDtoRequest.getMovieId());
         Hall hall = hallService.getHallById(assignedMovieDtoRequest.getHallId());
@@ -71,7 +87,7 @@ public class AssignedMovieService {
 
 
             AssignedMovie save = assignedMovieRepository.save(assignedMovie);
-            return AssignedMovieDtoResponse.builder().
+            return SaveAssignedMovieDtoResponse.builder().
                     id(save.getId()).
                     movieId(save.getMovie().getId()).
                     movieTitle(save.getMovie().getTitle()).
