@@ -1,5 +1,6 @@
 package com.project.cinema.services;
 
+import com.project.cinema.exceptions.MovieException;
 import com.project.cinema.model.Movie;
 import com.project.cinema.repos.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,16 @@ public class MovieService {
     }
 
     public Movie getMovieById(Long movieId) {
-        return movieRepository.findById(movieId).orElse(null);
+        try {
+            if (movieId == 5L) {
+                throw new MovieException("film hatası", false);
+            }
+            return movieRepository.findById(movieId).orElse(null);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw  e;
+        }
+
     }
 
     public Movie updateMovieById(Long movieId, Movie newMovie) {

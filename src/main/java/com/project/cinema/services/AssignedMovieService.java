@@ -2,6 +2,7 @@ package com.project.cinema.services;
 
 import com.project.cinema.dto.request.AssignedMovieDtoRequest;
 import com.project.cinema.dto.response.GetAssignedMovieDtoResponse;
+import com.project.cinema.dto.response.GetSessionsDtoResponse;
 import com.project.cinema.dto.response.SaveAssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.model.Hall;
@@ -11,9 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 public class AssignedMovieService {
@@ -119,5 +120,21 @@ public class AssignedMovieService {
 
     public void deleteAssignedMovieById(Long assignedMovieId) {
         assignedMovieRepository.deleteById(assignedMovieId);
+    }
+
+    public GetSessionsDtoResponse getSessionsByMovieId(Long movieId) {
+        var seanslar = assignedMovieRepository.findSessionsByMovieId(movieId);
+        LinkedHashMap<String,List<String>> hashMap=new LinkedHashMap<>();
+        seanslar.forEach(s -> {
+            var a = s.format(DateTimeFormatter.ofPattern("dd LLLL yyyy HH:mm", new Locale("tr")));
+            var date = (a.split(" ")[0].startsWith("0") ? a.split(" ")[0].charAt(1) : a.split(" ")[0]) + " " + a.split(" ")[1];
+            var time = a.split(" ")[3];
+            hashMap.putIfAbsent(date,new ArrayList<>());
+            hashMap.get(date).add(time);
+        });
+
+        System.out.println(hashMap);
+
+        return new GetSessionsDtoResponse(hashMap);
     }
 }

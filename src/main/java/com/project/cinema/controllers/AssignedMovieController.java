@@ -2,6 +2,7 @@ package com.project.cinema.controllers;
 
 import com.project.cinema.dto.request.AssignedMovieDtoRequest;
 import com.project.cinema.dto.response.GetAssignedMovieDtoResponse;
+import com.project.cinema.dto.response.GetSessionsDtoResponse;
 import com.project.cinema.dto.response.SaveAssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.services.AssignedMovieService;
@@ -30,6 +31,11 @@ public class AssignedMovieController {
     @GetMapping("/{assignedMovieId}")
     public AssignedMovie getAssignedMovieById(@PathVariable Long assignedMovieId) {
         return assignedMovieService.getAssignedMovieById(assignedMovieId);
+    }
+
+    @GetMapping("sessions/{movieId}")
+    public GetSessionsDtoResponse getSessionsByMovieId(@PathVariable Long movieId) {
+        return assignedMovieService.getSessionsByMovieId(movieId);
     }
 
     @PostMapping
