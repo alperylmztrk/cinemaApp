@@ -122,19 +122,24 @@ public class AssignedMovieService {
         assignedMovieRepository.deleteById(assignedMovieId);
     }
 
-    public GetSessionsDtoResponse getSessionsByMovieId(Long movieId) {
+    public LinkedHashMap<String,List<HashMap<String,String>>> getSessionsByMovieId(Long movieId) {
         var seanslar = assignedMovieRepository.findSessionsByMovieId(movieId);
-        LinkedHashMap<String,List<String>> hashMap=new LinkedHashMap<>();
+        LinkedHashMap<String,List<HashMap<String,String>>> hashMap=new LinkedHashMap<>();
         seanslar.forEach(s -> {
-            var a = s.format(DateTimeFormatter.ofPattern("dd LLLL yyyy HH:mm", new Locale("tr")));
+            var a = s.getStartDateTime().format(DateTimeFormatter.ofPattern("dd LLLL yyyy HH:mm", new Locale("tr")));
             var date = (a.split(" ")[0].startsWith("0") ? a.split(" ")[0].charAt(1) : a.split(" ")[0]) + " " + a.split(" ")[1];
             var time = a.split(" ")[3];
+            HashMap<String,String> saatler=new HashMap<>();
+            saatler.put("id",s.getId().toString());
+            saatler.put("time",time);
+
             hashMap.putIfAbsent(date,new ArrayList<>());
-            hashMap.get(date).add(time);
+            hashMap.get(date).add(saatler);
+
         });
 
         System.out.println(hashMap);
 
-        return new GetSessionsDtoResponse(hashMap);
+        return hashMap;
     }
 }

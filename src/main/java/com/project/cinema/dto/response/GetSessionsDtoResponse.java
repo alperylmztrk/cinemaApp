@@ -14,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class GetSessionsDtoResponse {
-
-  private HashMap<String, List<String>> seanslar;
-
+    private Long id;
+    private LocalDateTime startDateTime;
 }

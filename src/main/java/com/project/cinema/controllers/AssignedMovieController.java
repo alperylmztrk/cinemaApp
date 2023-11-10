@@ -9,6 +9,8 @@ import com.project.cinema.services.AssignedMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +36,7 @@ public class AssignedMovieController {
     }
 
     @GetMapping("sessions/{movieId}")
-    public GetSessionsDtoResponse getSessionsByMovieId(@PathVariable Long movieId) {
+    public LinkedHashMap<String, List<HashMap<String,String>>> getSessionsByMovieId(@PathVariable Long movieId) {
         return assignedMovieService.getSessionsByMovieId(movieId);
     }
 
