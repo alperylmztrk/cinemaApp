@@ -1,6 +1,7 @@
 package com.project.cinema.controllers;
 
 import com.project.cinema.model.Movie;
+import com.project.cinema.searchFilter.SearchCriteria;
 import com.project.cinema.services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,11 @@ public class MovieController {
     @PostMapping("/fake-veri-bas")
     public List<Movie> addFakeMovies() {
         return movieService.addFakeMovies();
+    }
+
+    @PostMapping("/filtered-movies")
+    public List<Movie> getFilteredMovies(@RequestBody SearchCriteria searchCriteria) {
+        return movieService.getFilteredMovies(searchCriteria);
     }
 
 }

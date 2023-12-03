@@ -3,6 +3,8 @@ package com.project.cinema.services;
 import com.project.cinema.exceptions.MovieException;
 import com.project.cinema.model.Movie;
 import com.project.cinema.repos.MovieRepository;
+import com.project.cinema.searchFilter.MovieSpecification;
+import com.project.cinema.searchFilter.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +75,14 @@ public class MovieService {
         List<Movie> fakeMovieList = new ArrayList<>(List.of(movie1, movie2, movie3, movie4, movie5, movie6));
 
         return movieRepository.saveAll(fakeMovieList);
+    }
+
+    public List<Movie> getFilteredMovies(SearchCriteria searchCriteria){
+
+        MovieSpecification movieSpecification=new MovieSpecification(searchCriteria);
+
+        return movieRepository.findAll(movieSpecification);
+
     }
 
 }
