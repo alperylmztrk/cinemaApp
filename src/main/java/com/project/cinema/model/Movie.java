@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "movies")
@@ -17,7 +16,7 @@ public class Movie {
     private Long id;
 
     @Column(name = "title", nullable = false)
-    private String title;
+    private String baslik;
 
     @Column(name = "genre", nullable = false)
     private String genre;
@@ -41,7 +40,7 @@ public class Movie {
     private String posterImgPath;
 
     public Movie(String title, String genre, int duration, String director, String cast, double rating, String summary, String posterImgPath) {
-        this.title = title;
+        this.baslik = title;
         this.genre = genre;
         this.duration = duration;
         this.director = director;

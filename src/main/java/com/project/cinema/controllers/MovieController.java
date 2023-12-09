@@ -50,8 +50,8 @@ public class MovieController {
     }
 
     @PostMapping("/filtered-movies")
-    public List<Movie> getFilteredMovies(@RequestBody SearchCriteria searchCriteria) {
-        return movieService.getFilteredMovies(searchCriteria);
+    public List<Movie> getFilteredMovies(@RequestBody List<SearchCriteria> searchCriteriaList) {
+        return movieService.getFilteredMovies(searchCriteriaList);
     }
 
 }

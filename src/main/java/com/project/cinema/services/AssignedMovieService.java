@@ -2,7 +2,6 @@ package com.project.cinema.services;
 
 import com.project.cinema.dto.request.AssignedMovieDtoRequest;
 import com.project.cinema.dto.response.GetAssignedMovieDtoResponse;
-import com.project.cinema.dto.response.GetSessionsDtoResponse;
 import com.project.cinema.dto.response.SaveAssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.model.Hall;
@@ -12,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -47,7 +45,7 @@ public class AssignedMovieService {
             getAssignedMovieDtoResponseList.add(GetAssignedMovieDtoResponse.builder().
                     id(assignedMovie.getId()).
                     movieId(assignedMovie.getMovie().getId()).
-                    movieTitle(assignedMovie.getMovie().getTitle()).
+                    movieTitle(assignedMovie.getMovie().getBaslik()).
                     startDateTime(assignedMovie.getStartDateTime()).
                     hallId(assignedMovie.getHall().getId()).
                     hallName(assignedMovie.getHall().getName()).
@@ -91,7 +89,7 @@ public class AssignedMovieService {
             return SaveAssignedMovieDtoResponse.builder().
                     id(save.getId()).
                     movieId(save.getMovie().getId()).
-                    movieTitle(save.getMovie().getTitle()).
+                    movieTitle(save.getMovie().getBaslik()).
                     startDateTime(save.getStartDateTime()).
                     hallName(save.getHall().getName()).
                     build();

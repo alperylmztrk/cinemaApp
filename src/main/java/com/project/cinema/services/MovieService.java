@@ -6,6 +6,7 @@ import com.project.cinema.repos.MovieRepository;
 import com.project.cinema.searchFilter.MovieSpecification;
 import com.project.cinema.searchFilter.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class MovieService {
             return movieRepository.findById(movieId).orElse(null);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw  e;
+            throw e;
         }
 
     }
@@ -47,7 +48,7 @@ public class MovieService {
         Optional<Movie> movie = movieRepository.findById(movieId);
         if (movie.isPresent()) {
             Movie foundedMovie = movie.get();
-            foundedMovie.setTitle(newMovie.getTitle());
+            foundedMovie.setBaslik(newMovie.getBaslik());
             foundedMovie.setDuration(newMovie.getDuration());
             foundedMovie.setGenre(newMovie.getGenre());
             foundedMovie.setCast(foundedMovie.getCast());
@@ -77,11 +78,18 @@ public class MovieService {
         return movieRepository.saveAll(fakeMovieList);
     }
 
-    public List<Movie> getFilteredMovies(SearchCriteria searchCriteria){
+    public List<Movie> getFilteredMovies(List<SearchCriteria> searchCriteriaList) {
 
-        MovieSpecification movieSpecification=new MovieSpecification(searchCriteria);
+        var specList = searchCriteriaList.stream().map(MovieSpecification::new).toList();
 
-        return movieRepository.findAll(movieSpecification);
+        Specification<Movie> result = specList.get(0);
+
+        for (int i = 1; i < specList.size(); i++) {
+            result=Specification.where(result).and(specList.get(i));
+        }
+
+        return movieRepository.findAll(result);
+
 
     }
 
