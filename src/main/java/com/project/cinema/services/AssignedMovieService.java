@@ -29,7 +29,7 @@ public class AssignedMovieService {
     }
 
     public AssignedMovie getAssignedMovieByIdEntity(Long assignedMovieId) {
-        return assignedMovieRepository.findById(assignedMovieId).orElseThrow(()-> new RuntimeException("Atanan Film Bulunamadı"));
+        return assignedMovieRepository.findById(assignedMovieId).orElseThrow(() -> new RuntimeException("Atanan Film Bulunamadı"));
     }
 
     public List<GetAssignedMovieDtoResponse> getAllAssignedMovies(Optional<Long> movieId, Optional<Long> hallId) {
@@ -54,7 +54,7 @@ public class AssignedMovieService {
                     hallId(assignedMovie.getHall().getId()).
                     hallName(assignedMovie.getHall().getName()).
                     hallCapacity(assignedMovie.getHall().getCapacity()).
-                    reservedSeatNum(assignedMovie.getReservedSeats().size()).
+                    reservedSeatNum((long) assignedMovie.getReservedSeats().size()).
                     build());
         }
 
@@ -101,7 +101,7 @@ public class AssignedMovieService {
     }
 
     public GetAssignedMovieDtoResponse getAssignedMovieById(Long assignedMovieId) {
-        return assignedMovieRepository.findByIdDto(assignedMovieId).orElseThrow(()-> new RuntimeException("Atanan Film Bulunamadı"));
+        return assignedMovieRepository.findByIdDto(assignedMovieId).orElseThrow(() -> new RuntimeException("Atanan Film Bulunamadı"));
     }
 
     public AssignedMovie updateAssignedMovieById(Long assignedMovieId, AssignedMovieDtoRequest assignedMovieDtoRequest) {
@@ -124,18 +124,18 @@ public class AssignedMovieService {
         assignedMovieRepository.deleteById(assignedMovieId);
     }
 
-    public LinkedHashMap<String,List<HashMap<String,String>>> getSessionsByMovieId(Long movieId) {
+    public LinkedHashMap<String, List<HashMap<String, String>>> getSessionsByMovieId(Long movieId) {
         var seanslar = assignedMovieRepository.findSessionsByMovieId(movieId);
-        LinkedHashMap<String,List<HashMap<String,String>>> hashMap=new LinkedHashMap<>();
+        LinkedHashMap<String, List<HashMap<String, String>>> hashMap = new LinkedHashMap<>();
         seanslar.forEach(s -> {
             var a = s.getStartDateTime().format(DateTimeFormatter.ofPattern("dd LLLL yyyy HH:mm", new Locale("tr")));
             var date = (a.split(" ")[0].startsWith("0") ? a.split(" ")[0].charAt(1) : a.split(" ")[0]) + " " + a.split(" ")[1];
             var time = a.split(" ")[3];
-            HashMap<String,String> saatler=new HashMap<>();
-            saatler.put("id",s.getId().toString());
-            saatler.put("time",time);
+            HashMap<String, String> saatler = new HashMap<>();
+            saatler.put("id", s.getId().toString());
+            saatler.put("time", time);
 
-            hashMap.putIfAbsent(date,new ArrayList<>());
+            hashMap.putIfAbsent(date, new ArrayList<>());
             hashMap.get(date).add(saatler);
 
         });

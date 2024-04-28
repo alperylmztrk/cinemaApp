@@ -1,9 +1,6 @@
 package com.project.cinema.dto.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -11,6 +8,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class GetAssignedMovieDtoResponse {
 
     private Long id;
@@ -20,6 +18,15 @@ public class GetAssignedMovieDtoResponse {
     private String hallName;
     private Integer hallCapacity;
     private LocalDateTime startDateTime;
-    private Integer reservedSeatNum;
+    private Long reservedSeatNum;
 
+    public GetAssignedMovieDtoResponse(Long id, Long movieId, String movieTitle, Long hallId, String hallName, Integer hallCapacity, LocalDateTime startDateTime) {
+        this.id = id;
+        this.movieId = movieId;
+        this.movieTitle = movieTitle;
+        this.hallId = hallId;
+        this.hallName = hallName;
+        this.hallCapacity = hallCapacity;
+        this.startDateTime = startDateTime;
+    }
 }

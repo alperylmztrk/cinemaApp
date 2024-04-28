@@ -1,10 +1,7 @@
 package com.project.cinema.services;
 
-import com.project.cinema.dto.SaveTicketDTO;
 import com.project.cinema.dto.SaveTicketWithUserDTO;
-import com.project.cinema.dto.SaveUserDTO;
 import com.project.cinema.dto.TicketDTO;
-import com.project.cinema.dto.response.GetAssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.model.Ticket;
 import com.project.cinema.model.User;
@@ -12,9 +9,8 @@ import com.project.cinema.repos.TicketRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
-import java.beans.BeanProperty;
 import java.util.List;
 import java.util.Optional;
 
