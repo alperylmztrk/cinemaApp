@@ -31,7 +31,7 @@ public class AssignedMovieController {
     }
 
     @GetMapping("/{assignedMovieId}")
-    public AssignedMovie getAssignedMovieById(@PathVariable Long assignedMovieId) {
+    public GetAssignedMovieDtoResponse getAssignedMovieById(@PathVariable Long assignedMovieId) {
         return assignedMovieService.getAssignedMovieById(assignedMovieId);
     }
 

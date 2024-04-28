@@ -1,12 +1,10 @@
 package com.project.cinema.controllers;
 
+import com.project.cinema.dto.request.HallDtoRequest;
 import com.project.cinema.model.Hall;
 import com.project.cinema.services.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,5 +27,10 @@ public class HallController {
     @GetMapping("/{hallId}")
     public Hall getHallById(@PathVariable Long hallId) {
         return hallService.getHallById(hallId);
+    }
+
+    @PostMapping
+    public Hall saveHall(@RequestBody HallDtoRequest hallDtoRequest) {
+        return hallService.saveHall(hallDtoRequest);
     }
 }

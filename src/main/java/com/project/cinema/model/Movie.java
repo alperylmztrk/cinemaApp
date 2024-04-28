@@ -19,7 +19,7 @@ public class Movie {
     private String baslik;
 
     @Column(name = "genre", nullable = false)
-    private String genre;
+    private String tur;
 
     @Column(name = "duration", nullable = false)
     private int duration;
@@ -27,8 +27,8 @@ public class Movie {
     @Column(name = "director", nullable = false)
     private String director;
 
-    @Column(name = "cast", nullable = false)
-    private String cast;
+    @Column(name = "actors", nullable = false)
+    private String actors;
 
     @Column(name = "rating", nullable = false)
     private double rating;
@@ -39,12 +39,12 @@ public class Movie {
     @Column(name = "posterImgPath", nullable = false)
     private String posterImgPath;
 
-    public Movie(String title, String genre, int duration, String director, String cast, double rating, String summary, String posterImgPath) {
+    public Movie(String title, String tur, int duration, String director, String actors, double rating, String summary, String posterImgPath) {
         this.baslik = title;
-        this.genre = genre;
+        this.tur = tur;
         this.duration = duration;
         this.director = director;
-        this.cast = cast;
+        this.actors = actors;
         this.rating = rating;
         this.summary = summary;
         this.posterImgPath = posterImgPath;

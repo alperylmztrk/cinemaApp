@@ -28,6 +28,10 @@ public class AssignedMovieService {
         this.hallService = hallService;
     }
 
+    public AssignedMovie getAssignedMovieByIdEntity(Long assignedMovieId) {
+        return assignedMovieRepository.findById(assignedMovieId).orElseThrow(()-> new RuntimeException("Atanan Film Bulunamadı"));
+    }
+
     public List<GetAssignedMovieDtoResponse> getAllAssignedMovies(Optional<Long> movieId, Optional<Long> hallId) {
         List<GetAssignedMovieDtoResponse> getAssignedMovieDtoResponseList = new ArrayList<>();
         List<AssignedMovie> assignedMovieList;
@@ -96,8 +100,8 @@ public class AssignedMovieService {
         }
     }
 
-    public AssignedMovie getAssignedMovieById(Long assignedMovieId) {
-        return assignedMovieRepository.findById(assignedMovieId).orElse(null);
+    public GetAssignedMovieDtoResponse getAssignedMovieById(Long assignedMovieId) {
+        return assignedMovieRepository.findByIdDto(assignedMovieId).orElseThrow(()-> new RuntimeException("Atanan Film Bulunamadı"));
     }
 
     public AssignedMovie updateAssignedMovieById(Long assignedMovieId, AssignedMovieDtoRequest assignedMovieDtoRequest) {

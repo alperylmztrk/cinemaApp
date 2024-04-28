@@ -50,8 +50,8 @@ public class MovieService {
             Movie foundedMovie = movie.get();
             foundedMovie.setBaslik(newMovie.getBaslik());
             foundedMovie.setDuration(newMovie.getDuration());
-            foundedMovie.setGenre(newMovie.getGenre());
-            foundedMovie.setCast(foundedMovie.getCast());
+            foundedMovie.setTur(newMovie.getTur());
+            foundedMovie.setActors(foundedMovie.getActors());
             foundedMovie.setDirector(newMovie.getDirector());
             foundedMovie.setSummary(newMovie.getSummary());
             foundedMovie.setRating(newMovie.getRating());

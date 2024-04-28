@@ -4,6 +4,7 @@ import com.project.cinema.dto.SaveTicketDTO;
 import com.project.cinema.dto.SaveTicketWithUserDTO;
 import com.project.cinema.dto.SaveUserDTO;
 import com.project.cinema.dto.TicketDTO;
+import com.project.cinema.dto.response.GetAssignedMovieDtoResponse;
 import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.model.Ticket;
 import com.project.cinema.model.User;
@@ -50,7 +51,7 @@ public class TicketService {
     public Ticket addTicket(TicketDTO ticketDTO) {
 
         User user = userService.getUserById(ticketDTO.getUserId());
-        AssignedMovie assignedMovie = assignedMovieService.getAssignedMovieById(ticketDTO.getAssignedMovieId());
+        AssignedMovie assignedMovie = assignedMovieService.getAssignedMovieByIdEntity(ticketDTO.getAssignedMovieId());
 
         if (user != null && assignedMovie != null) {
             Ticket ticket = new Ticket();
@@ -63,7 +64,6 @@ public class TicketService {
             return null;
         }
     }
-
 
     @Transactional
     public Ticket addTicketWithUser2(SaveTicketWithUserDTO saveTicketWithUserDTO) {

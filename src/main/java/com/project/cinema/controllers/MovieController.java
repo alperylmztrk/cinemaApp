@@ -44,7 +44,7 @@ public class MovieController {
         movieService.deleteMovie(movieId);
     }
 
-    @PostMapping("/fake-veri-bas")
+    @PostMapping("/dummy-data")
     public List<Movie> addFakeMovies() {
         return movieService.addFakeMovies();
     }
