@@ -18,7 +18,7 @@ public class GetAssignedMovieDtoResponse {
     private String hallName;
     private Integer hallCapacity;
     private LocalDateTime startDateTime;
-    private Long reservedSeatNum;
+    private Integer reservedSeatNum;
 
     public GetAssignedMovieDtoResponse(Long id, Long movieId, String movieTitle, Long hallId, String hallName, Integer hallCapacity, LocalDateTime startDateTime) {
         this.id = id;

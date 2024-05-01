@@ -54,7 +54,7 @@ public class AssignedMovieService {
                     hallId(assignedMovie.getHall().getId()).
                     hallName(assignedMovie.getHall().getName()).
                     hallCapacity(assignedMovie.getHall().getCapacity()).
-                    reservedSeatNum((long) assignedMovie.getReservedSeats().size()).
+                    reservedSeatNum(assignedMovie.getReservedSeats().size()).
                     build());
         }
 
