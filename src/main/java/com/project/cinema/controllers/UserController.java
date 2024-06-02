@@ -1,6 +1,7 @@
 package com.project.cinema.controllers;
 
 import com.project.cinema.model.User;
+import com.project.cinema.security.jwtauth.dto.SaveUserReq;
 import com.project.cinema.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User newUser) {
+    public User createUser(@RequestBody SaveUserReq newUser) {
         return userService.saveUser(newUser);
     }
 

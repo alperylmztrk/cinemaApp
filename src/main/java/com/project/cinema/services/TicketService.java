@@ -6,6 +6,7 @@ import com.project.cinema.model.AssignedMovie;
 import com.project.cinema.model.Ticket;
 import com.project.cinema.model.User;
 import com.project.cinema.repos.TicketRepository;
+import com.project.cinema.security.jwtauth.dto.SaveUserReq;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,9 +65,9 @@ public class TicketService {
     @Transactional
     public Ticket addTicketWithUser2(SaveTicketWithUserDTO saveTicketWithUserDTO) {
 
-        User user = new User();
-        BeanUtils.copyProperties(saveTicketWithUserDTO, user);
-        var newUser = userService.saveUser(user);
+        SaveUserReq saveUserReq = new SaveUserReq(saveTicketWithUserDTO.getName(), saveTicketWithUserDTO.getSurname(), saveTicketWithUserDTO.getUsername(), saveTicketWithUserDTO.getPassword(), null);
+
+        var newUser = userService.saveUser(saveUserReq);
 
         System.out.println(newUser);
 
