@@ -37,12 +37,12 @@ public class AuthController {
         return "Auth controller register";
     }
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String getLogin() {
         return "Auth controller login";
     }
 
-    @GetMapping("user")
+    @GetMapping("/user")
     public String getUser() {
         return "Auth controller user";
     }

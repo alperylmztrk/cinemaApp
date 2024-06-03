@@ -36,12 +36,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
         return security
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/**", "/swagger-ui/**", "/v3/**", "/user", "/auth/generate-token/**").permitAll()
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/auth/register/**", "/swagger-ui/**", "/v3/**", "/user/**", "/auth/generate-token/**").permitAll()
                         .requestMatchers("auth/user/**").hasRole("USER")
                         .requestMatchers("auth/admin/**").hasRole("ADMIN")
                 )
-
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)

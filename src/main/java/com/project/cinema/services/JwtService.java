@@ -24,7 +24,7 @@ public class JwtService {
                 .claims(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 2)) // 2 minutes
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 15)) // 15 minutes
                 .signWith(getSigningKey())
                 .compact();
     }
@@ -33,7 +33,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
     }
 
-    private Boolean validateToken(String token, String username) {
+    public Boolean validateToken(String token, String username) {
         return getUsernameFromToken(token).equals(username) && !isTokenExpired(token);
     }
 

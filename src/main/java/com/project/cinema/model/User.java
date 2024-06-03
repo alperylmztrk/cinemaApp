@@ -48,8 +48,6 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> authorities;
 
-
-
     public User(String name, String surname, String username) {
         this.name = name;
         this.surname = surname;
@@ -68,11 +66,6 @@ public class User implements UserDetails {
         this.enabled = enabled;
         this.password = password;
         this.authorities = authorities;
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
     }
 
 

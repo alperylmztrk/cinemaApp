@@ -19,12 +19,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<User> getAllUsers(String sicil) {
-        System.out.println("sicil= " + sicil);
-        return userService.getAllUsers();
-    }
-
     @PostMapping
     public User createUser(@RequestBody SaveUserReq newUser) {
         return userService.saveUser(newUser);
