@@ -25,13 +25,12 @@ public class AssignedMovieController {
         this.assignedMovieService = assignedMovieService;
     }
 
-    @PreAuthorize(value = "hasRole('ADMIN')")
+  //  @PreAuthorize(value = "hasRole('ADMIN')")
     @GetMapping
     public List<GetAssignedMovieDtoResponse> getAllAssignedMovies(@RequestParam Optional<Long> movieId, @RequestParam Optional<Long> hallId) {
         return assignedMovieService.getAllAssignedMovies(movieId, hallId);
     }
 
-    @PreAuthorize(value = "hasRole('ADMIN')")
     @GetMapping("/{assignedMovieId}")
     public GetAssignedMovieDtoResponse getAssignedMovieById(@PathVariable Long assignedMovieId) {
         return assignedMovieService.getAssignedMovieById(assignedMovieId);
@@ -42,17 +41,19 @@ public class AssignedMovieController {
         return assignedMovieService.getSessionsByMovieId(movieId);
     }
 
-
+    @PreAuthorize(value = "hasRole('ADMIN')")
     @PostMapping
     public SaveAssignedMovieDtoResponse createAssignedMovie(@RequestBody AssignedMovieDtoRequest assignedMovieDtoRequest) {
         return assignedMovieService.addAssignedMovie(assignedMovieDtoRequest);
     }
 
+    @PreAuthorize(value = "hasRole('ADMIN')")
     @PutMapping("/{assignedMovieId}")
     public AssignedMovie updateAssignedMovie(@PathVariable Long assignedMovieId, @RequestBody AssignedMovieDtoRequest assignedMovieDtoRequest) {
         return assignedMovieService.updateAssignedMovieById(assignedMovieId, assignedMovieDtoRequest);
     }
 
+    @PreAuthorize(value = "hasRole('ADMIN')")
     @DeleteMapping("/{assignedMovieId}")
     public void deleteAssignedMovieById(@PathVariable Long assignedMovieId) {
         assignedMovieService.deleteAssignedMovieById(assignedMovieId);

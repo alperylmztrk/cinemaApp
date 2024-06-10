@@ -4,6 +4,7 @@ import com.project.cinema.dto.request.HallDtoRequest;
 import com.project.cinema.model.Hall;
 import com.project.cinema.services.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class HallController {
         return hallService.getHallById(hallId);
     }
 
+    @PreAuthorize(value = "hasRole('ADMIN')")
     @PostMapping
     public Hall saveHall(@RequestBody HallDtoRequest hallDtoRequest) {
         return hallService.saveHall(hallDtoRequest);

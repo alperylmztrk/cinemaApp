@@ -37,9 +37,10 @@ public class SecurityConfig {
         return security
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/auth/register/**", "/swagger-ui/**", "/v3/**", "/user/**", "/auth/generate-token/**").permitAll()
+                      /*  .requestMatchers("/auth/register/**", "/swagger-ui/**", "/v3/**", "/user/**", "/auth/generate-token/**").permitAll()*/
                         .requestMatchers("auth/user/**").hasRole("USER")
                         .requestMatchers("auth/admin/**").hasRole("ADMIN")
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
