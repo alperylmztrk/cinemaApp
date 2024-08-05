@@ -1,5 +1,7 @@
 package com.project.cinema.controllers;
 
+import com.project.cinema.dto.response.LoginResDto;
+import com.project.cinema.security.enums.Role;
 import com.project.cinema.security.jwtauth.dto.AuthReq;
 import com.project.cinema.services.JwtService;
 import com.project.cinema.services.UserService;
@@ -8,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,10 +29,14 @@ public class AuthController {
     }
 
     @PostMapping("generate-token")
-    public String generateToken(@RequestBody AuthReq authReq) {
+    public LoginResDto generateToken(@RequestBody AuthReq authReq) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authReq.username(), authReq.password()));
         if (authentication.isAuthenticated()) {
-            return jwtService.generateToken(authReq.username());
+            var yetkiler=userService.getUserByUsername(authReq.username()).getAuthorities().stream().map(Role::getValue).collect(Collectors.toSet());
+            return LoginResDto.builder()
+                    .token(jwtService.generateToken(authReq.username()))
+                    .authorities(yetkiler)
+                    .build();
         }
         throw new UsernameNotFoundException("User not found " + authReq.username());
     }
