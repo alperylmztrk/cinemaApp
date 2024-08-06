@@ -32,10 +32,12 @@ public class AuthController {
     public LoginResDto generateToken(@RequestBody AuthReq authReq) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authReq.username(), authReq.password()));
         if (authentication.isAuthenticated()) {
-            var yetkiler=userService.getUserByUsername(authReq.username()).getAuthorities().stream().map(Role::getValue).collect(Collectors.toSet());
+            var user=userService.getUserByUsername(authReq.username());
             return LoginResDto.builder()
+                    .name(user.getName())
+                    .surname(user.getSurname())
                     .token(jwtService.generateToken(authReq.username()))
-                    .authorities(yetkiler)
+                    .authorities(user.getAuthorities().stream().map(Role::getValue).collect(Collectors.toSet()))
                     .build();
         }
         throw new UsernameNotFoundException("User not found " + authReq.username());
