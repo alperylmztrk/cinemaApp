@@ -48,9 +48,9 @@ public class MovieService {
         Optional<Movie> movie = movieRepository.findById(movieId);
         if (movie.isPresent()) {
             Movie foundedMovie = movie.get();
-            foundedMovie.setBaslik(newMovie.getBaslik());
+            foundedMovie.setTitle(newMovie.getTitle());
             foundedMovie.setDuration(newMovie.getDuration());
-            foundedMovie.setTur(newMovie.getTur());
+            foundedMovie.setGenre(newMovie.getGenre());
             foundedMovie.setActors(foundedMovie.getActors());
             foundedMovie.setDirector(newMovie.getDirector());
             foundedMovie.setSummary(newMovie.getSummary());

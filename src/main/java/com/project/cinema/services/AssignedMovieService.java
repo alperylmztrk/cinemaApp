@@ -49,7 +49,7 @@ public class AssignedMovieService {
             getAssignedMovieDtoResponseList.add(GetAssignedMovieDtoResponse.builder().
                     id(assignedMovie.getId()).
                     movieId(assignedMovie.getMovie().getId()).
-                    movieTitle(assignedMovie.getMovie().getBaslik()).
+                    movieTitle(assignedMovie.getMovie().getTitle()).
                     startDateTime(assignedMovie.getStartDateTime()).
                     hallId(assignedMovie.getHall().getId()).
                     hallName(assignedMovie.getHall().getName()).
@@ -93,7 +93,7 @@ public class AssignedMovieService {
             return SaveAssignedMovieDtoResponse.builder().
                     id(save.getId()).
                     movieId(save.getMovie().getId()).
-                    movieTitle(save.getMovie().getBaslik()).
+                    movieTitle(save.getMovie().getTitle()).
                     startDateTime(save.getStartDateTime()).
                     hallName(save.getHall().getName()).
                     build();

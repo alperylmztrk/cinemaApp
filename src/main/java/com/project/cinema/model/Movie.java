@@ -16,10 +16,10 @@ public class Movie {
     private Long id;
 
     @Column(name = "title", nullable = false)
-    private String baslik;
+    private String title;
 
     @Column(name = "genre", nullable = false)
-    private String tur;
+    private String genre;
 
     @Column(name = "duration", nullable = false)
     private int duration;
@@ -39,9 +39,9 @@ public class Movie {
     @Column(name = "posterImgPath", nullable = false)
     private String posterImgPath;
 
-    public Movie(String title, String tur, int duration, String director, String actors, double rating, String summary, String posterImgPath) {
-        this.baslik = title;
-        this.tur = tur;
+    public Movie(String title, String genre, int duration, String director, String actors, double rating, String summary, String posterImgPath) {
+        this.title = title;
+        this.genre = genre;
         this.duration = duration;
         this.director = director;
         this.actors = actors;
