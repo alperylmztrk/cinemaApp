@@ -7,6 +7,7 @@ import com.project.cinema.searchFilter.MovieSpecification;
 import com.project.cinema.searchFilter.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class MovieService {
     public Movie getMovieById(Long movieId) {
         try {
             if (movieId == 5L) {
-                throw new MovieException("film hatası", false);
+                throw new MovieException("film hatası", false, HttpStatus.NOT_FOUND);
             }
             return movieRepository.findById(movieId).orElse(null);
         } catch (Exception e) {

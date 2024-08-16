@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/halls")
+@CrossOrigin("*")
 public class HallController {
 
     private final HallService hallService;

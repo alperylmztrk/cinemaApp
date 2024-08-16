@@ -1,12 +1,16 @@
 package com.project.cinema.security.jwtauth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.cinema.exceptions.ErrorResponse;
 import com.project.cinema.services.JwtService;
 import com.project.cinema.services.UserService;
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,21 +34,31 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-        String token = request.getHeader("Authorization");
-        String username = null;
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-            username = jwtService.getUsernameFromToken(token);
-        }
-        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails user = userService.loadUserByUsername(username);
-            if (jwtService.validateToken(token, user.getUsername())) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+        try {
+            String token = request.getHeader("Authorization");
+            String username = null;
+            if (token != null && token.startsWith("Bearer ")) {
+                token = token.substring(7);
+                username = jwtService.getUsernameFromToken(token);
             }
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails user = userService.loadUserByUsername(username);
+                if (jwtService.validateToken(token, user.getUsername())) {
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
+                    authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
+            }
+        } catch (ExpiredJwtException ex) {
+            log.error("Token expired: {}", ex.getMessage());
+            ErrorResponse errorResponse = new ErrorResponse("Token süresi " + ex.getClaims().getExpiration() + " tarihinde doldu, tekrar giriş yapınız.", false);
+            response.setCharacterEncoding("UTF-8");
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setContentType("application/json");
+            response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
+            return;
         }
+
         filterChain.doFilter(request, response);
     }
 
