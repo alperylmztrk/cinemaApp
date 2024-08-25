@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/assignedMovies")
+@CrossOrigin("*")
 public class AssignedMovieController {
 
     private final AssignedMovieService assignedMovieService;
@@ -25,7 +26,7 @@ public class AssignedMovieController {
         this.assignedMovieService = assignedMovieService;
     }
 
-  //  @PreAuthorize(value = "hasRole('ADMIN')")
+    //  @PreAuthorize(value = "hasRole('ADMIN')")
     @GetMapping
     public List<GetAssignedMovieDtoResponse> getAllAssignedMovies(@RequestParam Optional<Long> movieId, @RequestParam Optional<Long> hallId) {
         return assignedMovieService.getAllAssignedMovies(movieId, hallId);

@@ -19,6 +19,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 @Component
 @Slf4j
@@ -51,11 +53,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             }
         } catch (ExpiredJwtException ex) {
             log.error("Token expired: {}", ex.getMessage());
-            ErrorResponse errorResponse = new ErrorResponse("Token süresi " + ex.getClaims().getExpiration() + " tarihinde doldu, tekrar giriş yapınız.", false);
+            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+            ErrorResponse errorResponse = new ErrorResponse("Oturum süresi " +  simpleDateFormat.format(ex.getClaims().getExpiration()) + " tarihinde doldu, tekrar giriş yapınız.", false);
             response.setCharacterEncoding("UTF-8");
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json");
             response.getWriter().write(new ObjectMapper().writeValueAsString(errorResponse));
+            System.out.println( simpleDateFormat.format(ex.getClaims().getExpiration()));
             return;
         }
 
