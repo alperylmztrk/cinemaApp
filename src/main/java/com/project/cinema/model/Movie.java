@@ -36,7 +36,7 @@ public class Movie {
     @Column(name = "summary", nullable = false)
     private String summary;
 
-    @Column(name = "posterImgPath", nullable = false)
+    @Column(name = "poster_img_path", nullable = false)
     private String posterImgPath;
 
     public Movie(String title, String genre, int duration, String director, String actors, double rating, String summary, String posterImgPath) {

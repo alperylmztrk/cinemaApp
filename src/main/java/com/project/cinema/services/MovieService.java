@@ -52,10 +52,11 @@ public class MovieService {
             foundedMovie.setTitle(newMovie.getTitle());
             foundedMovie.setDuration(newMovie.getDuration());
             foundedMovie.setGenre(newMovie.getGenre());
-            foundedMovie.setActors(foundedMovie.getActors());
+            foundedMovie.setActors(newMovie.getActors());
             foundedMovie.setDirector(newMovie.getDirector());
             foundedMovie.setSummary(newMovie.getSummary());
             foundedMovie.setRating(newMovie.getRating());
+            foundedMovie.setPosterImgPath(newMovie.getPosterImgPath());
             movieRepository.save(foundedMovie);
             return foundedMovie;
         }
