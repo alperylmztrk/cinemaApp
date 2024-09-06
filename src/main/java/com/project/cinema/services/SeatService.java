@@ -16,8 +16,8 @@ public class SeatService {
         this.seatRepository = seatRepository;
     }
 
-    public List<Seat> getAllSeats() {
-        return seatRepository.findAllByOrderByIdDesc();
+    public List<Seat> getSeatsBySeatNum(Integer koltukSayisi) {
+        return seatRepository.findSeatsByLimit(koltukSayisi);
     }
 
     public Seat getSeatById(Long seatId) {
