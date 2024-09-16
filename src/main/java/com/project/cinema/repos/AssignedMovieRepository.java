@@ -23,6 +23,6 @@ public interface AssignedMovieRepository extends JpaRepository<AssignedMovie, Lo
     @Query("select new com.project.cinema.dto.response.GetSessionsDtoResponse(a.id, a.startDateTime) from AssignedMovie a where a.movie.id= ?1 order by a.startDateTime asc ")
     List<GetSessionsDtoResponse> findSessionsByMovieId(Long movieId);
 
-    @Query("select new com.project.cinema.dto.response.GetAssignedMovieDtoResponse(a.id, a.movie.id, a.movie.title, a.hall.id, a.hall.name, a.hall.capacity, a.startDateTime, size(a.reservedSeats) ) from AssignedMovie a where a.id= ?1")
+    @Query("select new com.project.cinema.dto.response.GetAssignedMovieDtoResponse(a.id, a.movie.id, a.movie.title, a.hall.id, a.hall.name, a.hall.capacity, a.startDateTime, size(a.reservedSeats), a.movie.posterImgPath ) from AssignedMovie a where a.id= ?1")
     Optional<GetAssignedMovieDtoResponse> findByIdDto(Long id);
 }

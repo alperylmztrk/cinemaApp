@@ -19,14 +19,6 @@ public class GetAssignedMovieDtoResponse {
     private Integer hallCapacity;
     private LocalDateTime startDateTime;
     private Integer reservedSeatNum;
+    private String posterImgPath;
 
-    public GetAssignedMovieDtoResponse(Long id, Long movieId, String movieTitle, Long hallId, String hallName, Integer hallCapacity, LocalDateTime startDateTime) {
-        this.id = id;
-        this.movieId = movieId;
-        this.movieTitle = movieTitle;
-        this.hallId = hallId;
-        this.hallName = hallName;
-        this.hallCapacity = hallCapacity;
-        this.startDateTime = startDateTime;
-    }
 }
