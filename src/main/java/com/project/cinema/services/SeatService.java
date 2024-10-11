@@ -20,6 +20,14 @@ public class SeatService {
         return seatRepository.findSeatsByLimit(koltukSayisi);
     }
 
+    public List<Seat> getSeatsByIds(List<Long> ids) {
+        return seatRepository.findSeatsByIds(ids);
+    }
+
+    public List<Seat> getReservedSeatsBySessionId(Long sessionId) {
+        return seatRepository.findReservedSeatsBySessionId(sessionId);
+    }
+
     public Seat getSeatById(Long seatId) {
         return seatRepository.findById(seatId).orElse(null);
     }

@@ -1,8 +1,7 @@
 package com.project.cinema.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,10 +13,12 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "assignedMovies")
-@Data
+@Table(name = "sessions")
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
-public class AssignedMovie {
+public class Session {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,7 +43,7 @@ public class AssignedMovie {
     @JoinTable(name = "reservedSeats")
     private List<Seat> reservedSeats = new ArrayList<>();
 
-    public AssignedMovie(Movie movie, Hall hall, LocalDateTime startDateTime) {
+    public Session(Movie movie, Hall hall, LocalDateTime startDateTime) {
         this.movie = movie;
         this.hall = hall;
         this.startDateTime = startDateTime;

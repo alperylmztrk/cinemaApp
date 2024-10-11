@@ -9,8 +9,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     List<Ticket> findByUserId(Long userId);
 
-    List<Ticket> findByAssignedMovieId(Long assignedMovieId);
+    List<Ticket> findBySessionId(Long sessionId);
 
-    List<Ticket> findByUserIdAndAssignedMovieId(Long userId,Long assignedMovieId);
+    List<Ticket> findByUserIdAndSessionId(Long userId,Long sessionId);
 
 }

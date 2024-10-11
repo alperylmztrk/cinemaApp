@@ -1,6 +1,5 @@
 package com.project.cinema.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,11 +20,7 @@ public class Ticket {
     User user;
 
     @ManyToOne
-    @JoinColumn(name = "assignedMovieId", nullable = false)
-
-    AssignedMovie assignedMovie;
-
-    @Column(name = "seatNumber", nullable = false, unique = false)
-    String seatNumber;
+    @JoinColumn(name = "sessionId", nullable = false)
+    Session session;
 
 }

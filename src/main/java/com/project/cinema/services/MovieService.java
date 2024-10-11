@@ -33,16 +33,11 @@ public class MovieService {
     }
 
     public Movie getMovieById(Long movieId) {
-        try {
-            if (movieId == 5L) {
-                throw new MovieException("film hatası", false, HttpStatus.NOT_FOUND);
-            }
-            return movieRepository.findById(movieId).orElse(null);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw e;
+        var movieOpt = movieRepository.findById(movieId);
+        if (movieOpt.isEmpty()) {
+            throw new MovieException("film bulunamadı", false, HttpStatus.NOT_FOUND);
         }
-
+        return movieOpt.get();
     }
 
     public Movie updateMovieById(Long movieId, Movie newMovie) {
@@ -87,7 +82,7 @@ public class MovieService {
         Specification<Movie> result = specList.get(0);
 
         for (int i = 1; i < specList.size(); i++) {
-            result=Specification.where(result).and(specList.get(i));
+            result = Specification.where(result).and(specList.get(i));
         }
 
         return movieRepository.findAll(result);

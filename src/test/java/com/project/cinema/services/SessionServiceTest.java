@@ -5,29 +5,29 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AssignedMovieServiceTest {
+class SessionServiceTest {
 
     @BeforeEach
     void setUp() {
     }
 
     @Test
-    void getAllAssignedMovies() {
+    void getAllSessions() {
     }
 
     @Test
-    void addAssignedMovie() {
+    void addSession() {
     }
 
     @Test
-    void getAssignedMovieById() {
+    void getSessionById() {
     }
 
     @Test
-    void updateAssignedMovieById() {
+    void updateSessionById() {
     }
 
     @Test
-    void deleteAssignedMovieById() {
+    void deleteSessionById() {
     }
 }

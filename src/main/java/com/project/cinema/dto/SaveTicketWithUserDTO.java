@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class SaveTicketWithUserDTO {
     private Long userId;
-    private Long assignedMovieId;
+    private Long sessionId;
     private String seatNumber;
     private String name;
     private String surname;

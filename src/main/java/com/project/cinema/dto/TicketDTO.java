@@ -6,6 +6,6 @@ import lombok.Data;
 public class TicketDTO {
     private Long Id;
     private Long userId;
-    private Long assignedMovieId;
+    private Long sessionId;
     private String seatNumber;
 }

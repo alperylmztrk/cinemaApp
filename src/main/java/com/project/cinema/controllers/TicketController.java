@@ -4,6 +4,7 @@ import com.project.cinema.dto.SaveTicketDTO;
 import com.project.cinema.dto.SaveTicketWithUserDTO;
 import com.project.cinema.dto.SaveUserDTO;
 import com.project.cinema.dto.TicketDTO;
+import com.project.cinema.dto.request.TicketDtoRequest;
 import com.project.cinema.model.Ticket;
 import com.project.cinema.model.User;
 import com.project.cinema.services.TicketService;
@@ -15,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tickets")
+@CrossOrigin("*")
 public class TicketController {
 
     private final TicketService ticketService;
@@ -25,8 +27,8 @@ public class TicketController {
     }
 
     @GetMapping
-    public List<Ticket> getAllTickets(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> assignedMovieId) {
-        return ticketService.getAllTickets(userId, assignedMovieId);
+    public List<Ticket> getAllTickets(@RequestParam Optional<Long> userId, @RequestParam Optional<Long> sessionId) {
+        return ticketService.getAllTickets(userId, sessionId);
     }
 
     @GetMapping("/{ticketId}")
@@ -35,8 +37,8 @@ public class TicketController {
     }
 
     @PostMapping
-    public Ticket createTicket(@RequestBody TicketDTO ticketDTO) {
-        return ticketService.addTicket(ticketDTO);
+    public Ticket createTicket(@RequestBody TicketDtoRequest ticketDtoRequest) {
+        return ticketService.addTicket(ticketDtoRequest);
     }
 
     @PostMapping("ticket-with-user2")
