@@ -37,9 +37,8 @@ public class Session {
     @Column(name = "startDateTime", nullable = false)
     private LocalDateTime startDateTime;
 
-
     @ManyToMany
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST})
+    @Cascade({org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST})
     @JoinTable(name = "reservedSeats")
     private List<Seat> reservedSeats = new ArrayList<>();
 
